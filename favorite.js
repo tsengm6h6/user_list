@@ -1,7 +1,7 @@
 // 初始變數
 const BASE_URL = "https://lighthouse-user-api.herokuapp.com"
 const INDEX_URL = BASE_URL + "/api/v1/users/"
-const USERS_PER_PAGE = 6
+const USERS_PER_PAGE = 2
 
 // 存放資料的容器
 let users = JSON.parse(localStorage.getItem('love'))
@@ -41,28 +41,50 @@ function displayUsers(data) {
   dataPanel.innerHTML = htmlContent;
 }
 
-// 刪除使用者資料 --> 記得將 users 修改成 let 變數不是const
+// 刪除使用者資料
+// 1.1 改變 users 容器內的資料，重新渲染頁面及分頁器
+// 1.2 依照頁面內容停留在使用者所在頁面或跳轉成至前一頁
+
 function removeFromLove(id) {
+
+  // 先取得id的Index所屬區段的那一頁
+  const page = findDeleteItemPage(id)
+
+  // 才進行users內容更動，找出id的Index並刪除
   const theUserIndex = users.findIndex((user) => user.id === id)
   users.splice(theUserIndex, 1)
   localStorage.setItem('love', JSON.stringify(users))
-  // numberOfPages = Math.ceil(users.length / USERS_PER_PAGE)
 
-  displayPaginator(users) //依照users長度重新渲染分頁器
-  displayUsers(getUsersByPage(1)) //總頁數的最後一頁
+  // 用getUsersByPage切出該頁的index區段
+  // 若該區段有內容，則停留在該頁(true)；若區段內沒有內容(即長度為0)，則頁數往前一頁(減一)(false)
+  const thePage = getUsersByPage(page).length ? page : (page - 1)
 
-  // //如果新的頁數減少，則往前一頁(= 顯示新的總頁數的最後一頁 )
-  // if (newNumberOfPages < numberOfPages) {
-  //   displayUsers(getUsersByPage(newNumberOfPages))
-  // }
+  if (thePage === 0) {  //如果第一頁也沒有內容了(即頁數1再減一為0)
+    displayUsers(getUsersByPage(1)) //則停留在第一頁，分頁器無須重新渲染(頁碼為1)
+  } else {
+    displayPaginator(users) //依照users長度重新渲染分頁器
+    displayUsers(getUsersByPage(thePage)) //停留在thePage那一頁
+  }
 
 }
-// TODO: 刪除後分頁器要隨之改變
+
+// 函式 - 找出欲刪除項目的所在頁面
+function findDeleteItemPage(id) {
+  const numberOfPages = Math.ceil(users.length / USERS_PER_PAGE) //總頁數 2
+  for (let page = 1; page <= numberOfPages; page++) {
+    const usersRange = getUsersByPage(page) //getUsersByPage(1)
+    // page 1 --> usersRange = users [0,1,2,3,4,5]
+    // page 2 --> usersRange = users [6,7,8,9,10,11]
+    if (usersRange.some((user) => user.id === id)) { //找到id的那一頁
+      // console.log(usersRange, page, id)
+      return (page)
+    }
+  }
+}
 
 // 收藏也要分頁
-// 加入分頁功能，每頁6個名單
-// 1.3 設置監聽器，當點擊分頁碼時，找出資料切割的區段
-// 1.4 將回傳的該區段資料渲染在畫面上
+// 1.1 設置監聽器，當點擊分頁碼時，找出資料切割的區段
+// 1.2 將回傳的該區段資料渲染在畫面上
 paginator.addEventListener('click', function onPaginatorClicked(event) {
   const thePage = event.target.dataset.page
   displayUsers(getUsersByPage(thePage))
@@ -83,7 +105,7 @@ function getUsersByPage(page) {
 function displayPaginator(data) {
 
   // 計算總頁數
-  let numberOfPages = Math.ceil(users.length / USERS_PER_PAGE)
+  const numberOfPages = Math.ceil(users.length / USERS_PER_PAGE)
 
   let htmlContent = ``
 
