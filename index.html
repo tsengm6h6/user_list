@@ -43,6 +43,48 @@
       </form>
     </div>
 
+    <!-- 篩選、顯示欄位 -->
+    <div class="row d-flex justify-content-between align-items-center">
+      <!-- TODO: SearchBy 分類 -->
+      <div class="col-6">
+        <em class='mr-2'>Search By : </em>
+        <div class="form-check form-check-inline">
+          <input checked class="form-check-input" type="radio" name="nameOrRegion" id="searchByName" value="name">
+          <label class="form-check-label" for="searchByName">Name</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="nameOrRegion" id="searchByRegion" value="region">
+          <label class="form-check-label" for="searchByRegion">Region</label>
+        </div>
+      </div>
+      <!-- TODO: 顯示 View 欄位 -->
+      <div class="col-2">
+        <div class="icons d-flex justify-content-end" id='view-style'>
+          <i class="fas fa-border-all mr-2 mt-3"></i>
+          <i class="fas fa-bars mr-2 mt-3"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- TODO: 男 / 女 -->
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-6">
+        <em class='mr-2'>Show only : </em>
+        <div class="form-check form-check-inline">
+          <input checked class="form-check-input" type="radio" name="genderChoice" id="searchAllGender" value="all">
+          <label class="form-check-label" for="searchAllGender">All</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="genderChoice" id="searchMaleOnly" value="male">
+          <label class="form-check-label" for="searchMaleOnly">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="genderChoice" id="searchFemaleOnly" value="female">
+          <label class="form-check-label" for="searchFemaleOnly">Female</label>
+        </div>
+      </div>
+    </div>
+
     <!--  user清單  -->
     <div class="row mt-3" id='data-panel'>
       <!--  Display User List Here    -->

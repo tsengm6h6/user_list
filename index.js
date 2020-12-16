@@ -5,12 +5,19 @@ const USERS_PER_PAGE = 18
 
 // 存放資料的容器
 const users = [];
-let filteredUserByName = [];
+let filteredUserList = [];
+let category = [];
 
 const dataPanel = document.querySelector("#data-panel")
 const searchForm = document.querySelector('#search-form')
 const searchInput = document.querySelector('#search-input')
 const paginator = document.querySelector('#paginator')
+
+const searchByName = document.querySelector('#searchByName')
+const searchByRegion = document.querySelector('#searchByRegion')
+const searchMaleOnly = document.querySelector('#searchMaleOnly')
+const searchFemaleOnly = document.querySelector('#searchFemaleOnly')
+const searchAllGender = document.querySelector('#searchAllGender')
 
 // 加入搜尋功能
 // 1.1 按鈕上設置監聽器，Submit時執行onSearchClicked(){
@@ -24,29 +31,57 @@ searchForm.addEventListener('submit', function onSearchClicked(event) {
   if (!keyword.length) return alert('請輸入查詢內容')
 
   searchUserBy(keyword) //TODO:可改為age、region等
-  displayPaginator(filteredUserByName)
+  displayPaginator(filteredUserList)
 
-  if (filteredUserByName.length === 0) {
+  if (filteredUserList.length === 0) {
     alert('您輸入的內容查無此人')
     displayUsers(users)
   }
 
 })
 
+// TODO: 函式 - 只顯示選擇的內容 Male / Female
+function showOnly() { }
+
 // 函式 - searchByUser(name) 尋找使用者姓名
 // 1.1 取得input內容字串keyword，keyword以name為例
 // 1.2 從users裡尋找與字串內容相符的那位人物的那筆資料
 // 1.3 用displayUsers()渲染畫面
 
-function searchUserBy(name) {
+function searchUserBy(word) {
 
-  // 篩選的function
-  function filteruser(user) {
-    return user.name.toLowerCase().includes(name) //只保留符合條件者
+  // 依據SearchByName / Region篩選
+  if (searchByName.checked == true) {
+    filteredUserList = users.filter((user) => {
+      return user.name.toLowerCase().includes(word)
+    })
   }
-  // 用filter執行篩選的function並存在filteredUserByName裡
-  filteredUserByName = users.filter(filteruser)
-  console.log(filteredUserByName)
+  else if (searchByRegion.checked == true) {
+    filteredUserList = users.filter((user) => {
+      return user.region.toLowerCase().includes(word)
+    })
+  }
+
+  console.log(filteredUserList)
+
+  // 如果只顯示男生
+  if (searchMaleOnly.checked == true) {
+    for (let index = filteredUserList.length - 1; index >= 0; index--) {
+      if (filteredUserList[index].gender === 'female') {
+        filteredUserList.splice(index, 1)
+      }
+    }
+  }
+  //只顯示女生
+  else if (searchFemaleOnly.checked == true) {
+    for (let index = filteredUserList.length - 1; index >= 0; index--) {
+      if (filteredUserList[index].gender === 'male') {
+        filteredUserList.splice(index, 1)
+      }
+    }
+  }
+
+  console.log(filteredUserList)
   displayUsers(getUsersByPage(1)) //渲染畫面為搜尋分頁的第一頁
 }
 
@@ -62,7 +97,7 @@ paginator.addEventListener('click', function onPaginatorClicked(event) {
 function getUsersByPage(page) {
   // page 1 --> get 0-11 
   // page 2 --> get 12-23
-  const data = filteredUserByName.length ? filteredUserByName : users
+  const data = filteredUserList.length ? filteredUserList : users
   const startIndex = (page - 1) * USERS_PER_PAGE
   const usersThisPage = data.slice(startIndex, startIndex + USERS_PER_PAGE)
   return usersThisPage
