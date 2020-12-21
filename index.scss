@@ -461,17 +461,17 @@ main {
 
          
            &.male {
-           border: 4px solid $main-blue;
+           border: 3px solid $main-blue;
          }
 
           &.female {
-           border: 4px solid $main-rose;
+           border: 3px solid $main-rose;
          }
 
 
         img {
           border-radius: 50%;
-          border: 3px solid $background-white;
+          border: 2px solid $background-white;
           position: relative;
           z-index: 0;
           opacity: 1;
@@ -482,11 +482,11 @@ main {
           @include heart-button;
           // border: 1px solid red;
           position: absolute;
-          bottom: 5px;
-          right: 8px;
+          bottom: 3px;
+          right: 2px;
           background-color: $item-silver;
-          width: 25%;
-          height: 25%;
+          width: 30%;
+          height: 30%;
           padding: 10px;
           border-radius: 50%;
           box-shadow: 0px 0px 2px $border-black;
@@ -498,11 +498,15 @@ main {
           i {
             display: block;
             position: relative;
-            font-size: 1.2em;
+            font-size: .8em;
             color: $main-rose;
             bottom: 0;
             transition: all .1s ease-in;
             z-index: 4;
+
+            &.btn-remove-love {
+              color: $border-black;
+            }
           }
 
           &:hover{
@@ -547,6 +551,13 @@ main {
       background-blend-mode: luminosity;
       box-shadow: 2px 2px 3px $item-silver;
       border-radius: 6px;
+      position: relative;
+      bottom: 0;
+      transition: all .1s ease;
+
+        &:hover {
+          bottom: 1px;
+        }
 
         .info-container {
         display: flex;
@@ -610,6 +621,11 @@ main {
               color: $main-rose;
               position: relative;
               top: 2px;
+
+                &.btn-remove-love {
+                color: $border-black;
+                top: 1px;
+              }
             }
           }
             
@@ -675,11 +691,20 @@ main {
 // ****** Modal ************* //
 
 .modal {
-  top: 20%;
-  // TODO: modal展開動畫
+  top: 15%;
+  // modal展開動畫
+  
+  &.fade{
+    .modal-dialog {
+      transform: scale(0);
+    }
+  }
 
-  .modal-dialog {
-    margin: 2rem auto;
+  &.show {
+    .modal-dialog {
+      transform: scale(0.8);
+      margin: 0 auto;
+    }
   }
 }
 
@@ -747,7 +772,19 @@ main {
       width: 1.1em;
       height: 1.1em;
       border-radius: 50%;
-      opacity: 0.9;
+      opacity: 1;
+      transition: all .2s ease;
+
+      &.modal-close {
+        
+        &:hover {
+          opacity: 1;
+        } 
+        
+        &:active {
+          transform: scale(1.2) rotate(135deg);
+        }
+      }
 
       &:focus {
         outline: none;

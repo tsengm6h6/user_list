@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="./index.css">
 </head>
 
-<!-- TODO: commit 新版本 -->
 <!-- TODO: Login logo -->
 <!-- TODO: 向下引導箭頭 -->
 
@@ -35,56 +34,9 @@
         <i class="fas fa-heart" aria-hidden="true"></i>
         <a href="#">Blacklist</a>
       </div>
-      <div class='nav-search'>
-        <!-- 點選button時icon箭頭向上 -->
-        <button id='search-button' href="#">Search<i class="fas fa-caret-up"></i>
-          <i class="fas fa-caret-down "></i>
-        </button>
-      </div>
       <div class="middle-line"></div>
     </nav>
   </header>
-
-  <!-- Slice / Search -->
-  <div class="slice">
-    <div class="search-container">
-      <section class="search-bar">
-        <form action="submit" id='search-form'>
-          <i class="fa fa-search" aria-hidden="true"></i>
-          <input id='search-input' type="text">
-          <i class="fa fa-filter" aria-hidden="true" id='filter'></i>
-          <!-- 點擊filter時，container跟search-filter加上show的class -->
-        </form>
-        <div class="search-filter">
-          <div class="methods-container">
-            <em>Method</em>
-            <input checked class="search-method" type="radio" name="nameOrRegion" id="searchByName" value="name">
-            <label class="search-method-label" for="searchByName">Name</label>
-
-            <input class="search-method" type="radio" name="nameOrRegion" id="searchByRegion" value="region">
-            <label class="search-method-label" for="searchByRegion">Region</label>
-
-          </div>
-          <div class="gender-options-container" id='genderSelector'>
-            <em>Gender </em>
-            <div class="gender-options">
-              <input checked class="search-gender" type="radio" name="genderChoice" id="searchAllGender" value="all">
-              <label class="search-gender-label" for="searchAllGender">All</label>
-            </div>
-            <div class="gender-options">
-              <input class="search-gender" type="radio" name="genderChoice" id="searchMaleOnly" value="male">
-              <label class="search-gender-label" for="searchMaleOnly">Male</label>
-            </div>
-            <div class="gender-options">
-              <input class="search-gender" type="radio" name="genderChoice" id="searchFemaleOnly" value="female">
-              <label class="search-gender-label" for="searchFemaleOnly">Female</label>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-    <div class="middle-line"></div>
-  </div>
 
   <!-- Main -->
   <main class='main-container'>
@@ -117,6 +69,7 @@
     </ul>
   </nav>
 
+  <!-- TODO: Modal CSS 設計：看能不能scale打開 -->
   <!-- User Modal -->
   <div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -137,7 +90,7 @@
           <button type="button" class="btn" data-dismiss="modal">Close</button>
         </div>
 
-        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
 
@@ -155,7 +108,7 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <!-- 引入 index.js -->
-  <script src='./new_index.js'></script>
+  <script src='./new_favorite.js'></script>
 
   <!-- 引入Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
