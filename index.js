@@ -1,23 +1,29 @@
 // 初始變數
 const BASE_URL = "https://lighthouse-user-api.herokuapp.com";
 const INDEX_URL = BASE_URL + "/api/v1/users/";
-const USERS_PER_PAGE = 18
+const USERS_PER_PAGE = 6
 
 // 存放資料的容器
 const users = [];
-let filteredUserList = [];
-let category = [];
+let searchResult = [];
+let filteredResult = [];
 
 const dataPanel = document.querySelector("#data-panel")
 const searchForm = document.querySelector('#search-form')
 const searchInput = document.querySelector('#search-input')
 const paginator = document.querySelector('#paginator')
+const genderSelector = document.querySelector('#genderSelector')
 
-const searchByName = document.querySelector('#searchByName')
-const searchByRegion = document.querySelector('#searchByRegion')
-const searchMaleOnly = document.querySelector('#searchMaleOnly')
-const searchFemaleOnly = document.querySelector('#searchFemaleOnly')
-const searchAllGender = document.querySelector('#searchAllGender')
+// TODO: 先做gender監聽
+genderSelector.addEventListener('click', function onGenderClicked(event) {
+
+  let data = searchResult.length ? searchResult : users
+  genderFilter(data)
+
+  // let ageStart = 
+  // let ageEnd
+  // ageFilter(ageStart, ageEnd)
+})
 
 // 加入搜尋功能
 // 1.1 按鈕上設置監聽器，Submit時執行onSearchClicked(){
@@ -27,63 +33,88 @@ const searchAllGender = document.querySelector('#searchAllGender')
 
 searchForm.addEventListener('submit', function onSearchClicked(event) {
   event.preventDefault() //停止瀏覽器預設行為
+  filteredResult = [] //每次搜尋都先清空篩選內容
+
   const keyword = searchInput.value.trim().toLowerCase()
   if (!keyword.length) return alert('請輸入查詢內容')
 
-  searchUserBy(keyword) //TODO:可改為age、region等
-  displayPaginator(filteredUserList)
+  //用 name / region 搜尋，並儲存在searchResult
+  searchByWhat(keyword)
 
-  if (filteredUserList.length === 0) {
-    alert('您輸入的內容查無此人')
-    displayUsers(users)
+  // 若搜尋沒有結果，則alert並返回預設值
+  if (searchResult.length === 0) {
+    alert('您輸入的內容查無資料')
+    // 單選性別回到預設值
+    const selectedGender = document.querySelector('input[name=genderChoice]:checked')
+    const defaultGender = document.querySelector('#searchAllGender')
+    selectedGender.checked = false
+    defaultGender.checked = true
+    // 畫面回到預設值 --> 用users渲染
+    displayPaginator(users) // 搜尋沒有結果，所以用users分頁
+    displayUsers(getUsersByPage(1)) //filteredResult被清空，所以渲染畫面的資料為users
+  }
+
+  // 若搜尋有結果，則searchResult丟進filter進階篩選
+  else {
+    genderFilter(searchResult)
+    // TODO: 年齡篩選
   }
 
 })
 
-// TODO: 函式 - 只顯示選擇的內容 Male / Female
-function showOnly() { }
+// TODO: 函式 - 篩選性別
+function genderFilter(data) {
+
+  // 取得圈選的性別
+  const selectedGender = document.querySelector('input[name=genderChoice]:checked').value
+
+  // 若圈選 all，則全部放進filteredResult
+  if (selectedGender === 'all') {
+    filteredResult = data.filter((user) => user)
+  }
+
+  // 否則依照圈選性別篩選，將篩選結果放進filteredResult
+  else {
+    filteredResult = data.filter((user) => user.gender === selectedGender)
+  }
+
+  // 若篩選結果為 0 ，也全部放進filteredResult
+  if (filteredResult.length === 0) {
+    alert('您的篩選結果沒有資料')
+    filteredResult = [] //顯示全部
+    // 單選性別回到預設值
+    const selectedGender = document.querySelector('input[name=genderChoice]:checked')
+    const defaultGender = document.querySelector('#searchAllGender')
+    selectedGender.checked = false
+    defaultGender.checked = true
+    // 
+    displayPaginator(users) // 篩選沒有結果，所以用users分頁
+    displayUsers(getUsersByPage(1)) //filteredResult被清空，所以渲染畫面的資料為users
+  }
+  else {
+    displayUsers(getUsersByPage(1)) //filteredResult有東西，用filteredResult渲染畫面
+    displayPaginator(filteredResult) // 依據filteredResult分頁
+  }
+
+  console.log(filteredResult, searchResult, users)
+}
 
 // 函式 - searchByUser(name) 尋找使用者姓名
 // 1.1 取得input內容字串keyword，keyword以name為例
 // 1.2 從users裡尋找與字串內容相符的那位人物的那筆資料
 // 1.3 用displayUsers()渲染畫面
 
-function searchUserBy(word) {
+function searchByWhat(word) {
 
-  // 依據SearchByName / Region篩選
-  if (searchByName.checked == true) {
-    filteredUserList = users.filter((user) => {
-      return user.name.toLowerCase().includes(word)
-    })
-  }
-  else if (searchByRegion.checked == true) {
-    filteredUserList = users.filter((user) => {
-      return user.region.toLowerCase().includes(word)
-    })
-  }
+  // 取得搜尋的方式 By name / By region
+  const searchMethod = document.querySelector('input[name=nameOrRegion]:checked').value
 
-  console.log(filteredUserList)
-
-  // 如果只顯示男生
-  if (searchMaleOnly.checked == true) {
-    for (let index = filteredUserList.length - 1; index >= 0; index--) {
-      if (filteredUserList[index].gender === 'female') {
-        filteredUserList.splice(index, 1)
-      }
-    }
-  }
-  //只顯示女生
-  else if (searchFemaleOnly.checked == true) {
-    for (let index = filteredUserList.length - 1; index >= 0; index--) {
-      if (filteredUserList[index].gender === 'male') {
-        filteredUserList.splice(index, 1)
-      }
-    }
-  }
-
-  console.log(filteredUserList)
-  displayUsers(getUsersByPage(1)) //渲染畫面為搜尋分頁的第一頁
+  // 依據選擇篩選出包含keyword的資料，存在searchResult裡
+  if (searchMethod === 'name') {
+    searchResult = users.filter((user) => user.name.toLowerCase().includes(word))
+  } else { searchResult = users.filter((user) => user.region.toLowerCase().includes(word)) }
 }
+
 
 // 加入分頁功能，每頁18個名單
 // 1.3 設置監聽器，當點擊分頁碼時，找出資料切割的區段
@@ -97,7 +128,7 @@ paginator.addEventListener('click', function onPaginatorClicked(event) {
 function getUsersByPage(page) {
   // page 1 --> get 0-11 
   // page 2 --> get 12-23
-  const data = filteredUserList.length ? filteredUserList : users
+  const data = filteredResult.length ? filteredResult : users
   const startIndex = (page - 1) * USERS_PER_PAGE
   const usersThisPage = data.slice(startIndex, startIndex + USERS_PER_PAGE)
   return usersThisPage
@@ -121,9 +152,6 @@ function displayPaginator(data) {
   paginator.innerHTML = htmlContent;
 
 }
-
-
-
 
 // 函式 - 將所有使用者的資料渲染畫面
 function displayUsers(data) {
@@ -213,4 +241,3 @@ axios
     displayUsers(getUsersByPage(1))
   })
   .catch((error) => console.log(error));
-

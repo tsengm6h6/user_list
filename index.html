@@ -34,40 +34,12 @@
   </nav>
 
   <div class="container">
-    <!--  搜尋欄  -->
-    <div class="row mt-3 justify-content-end">
-      <form class="form-inline" id='search-form'>
-        <input class="form-control mr-sm-2" id='search-input' type="text" placeholder="find your love..."
-          aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0 btn-search-love" type="submit">Search</button>
-      </form>
-    </div>
-
-    <!-- 篩選、顯示欄位 -->
-    <div class="row d-flex justify-content-between align-items-center">
-      <!-- TODO: SearchBy 分類 -->
-      <div class="col-6">
-        <em class='mr-2'>Search By : </em>
-        <div class="form-check form-check-inline">
-          <input checked class="form-check-input" type="radio" name="nameOrRegion" id="searchByName" value="name">
-          <label class="form-check-label" for="searchByName">Name</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="nameOrRegion" id="searchByRegion" value="region">
-          <label class="form-check-label" for="searchByRegion">Region</label>
-        </div>
-      </div>
-      <!-- TODO: 顯示 View 欄位 -->
-      <div class="col-2">
-        <div class="icons d-flex justify-content-end" id='view-style'>
-          <i class="fas fa-border-all mr-2 mt-3"></i>
-          <i class="fas fa-bars mr-2 mt-3"></i>
-        </div>
-      </div>
+    <div class="row mt-5">
+      <div class="col-12">Filter</div>
     </div>
 
     <!-- TODO: 男 / 女 -->
-    <div class="row d-flex justify-content-between align-items-center">
+    <div class="row mt-2 d-flex justify-content-between align-items-center" id='genderSelector'>
       <div class="col-6">
         <em class='mr-2'>Show only : </em>
         <div class="form-check form-check-inline">
@@ -81,6 +53,51 @@
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="genderChoice" id="searchFemaleOnly" value="female">
           <label class="form-check-label" for="searchFemaleOnly">Female</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- TODO: 年齡範圍 -->
+    <div class="row mt-2 d-flex justify-content-between align-items-center">
+      <div class="col-6">
+        <em class='mr-2'>Age Range: </em>
+        <!-- TODO: Range Bar Here -->
+        <label for="customRange2"></label>
+        <input type="range" class="custom-range" min="18" max="85" id="ageRange">
+      </div>
+    </div>
+
+    <!-- TODO: SearchBy 分類 -->
+    <div class="row mt-2 d-flex justify-content-between align-items-center">
+      <div class="col-6">
+        <em class='mr-2'>Search By : </em>
+        <div class="form-check form-check-inline">
+          <input checked class="form-check-input" type="radio" name="nameOrRegion" id="searchByName" value="name">
+          <label class="form-check-label" for="searchByName">Name</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="nameOrRegion" id="searchByRegion" value="region">
+          <label class="form-check-label" for="searchByRegion">Region</label>
+        </div>
+      </div>
+    </div>
+
+    <!--  搜尋欄  -->
+    <div class="row mt-2 d-flex justify-content-between align-items-center">
+      <form class="form-inline" id='search-form'>
+        <input class="form-control mr-sm-2" id='search-input' type="text" placeholder="find your love..."
+          aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0 btn-search-love" type="submit">Search</button>
+      </form>
+    </div>
+
+    <!-- TODO: reset filter -->
+    <!-- TODO: 顯示 Gallery / List 欄位 -->
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col">
+        <div class="icons d-flex justify-content-end" id='view-style'>
+          <i class="fas fa-border-all mr-2 mt-3"></i>
+          <i class="fas fa-bars mr-2 mt-3"></i>
         </div>
       </div>
     </div>
