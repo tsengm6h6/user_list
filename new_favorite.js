@@ -7,6 +7,7 @@ const USERS_PER_PAGE = 6
 const users = JSON.parse(localStorage.getItem('love'));
 let searchResult = [];
 let filteredResult = [];
+let thePage = 1;
 
 const dataPanel = document.querySelector("#data-panel")
 const searchForm = document.querySelector('#search-form')
@@ -18,7 +19,7 @@ const viewMode = document.querySelector('#view-mode')
 // 1.3 設置監聽器，當點擊分頁碼時，找出資料切割的區段
 // 1.4 將回傳的該區段資料渲染在畫面上
 paginator.addEventListener('click', function onPaginatorClicked(event) {
-  const thePage = event.target.dataset.page
+  thePage = event.target.dataset.page
   displayUsers(getUsersByPage(thePage))
 })
 
@@ -55,9 +56,8 @@ function displayPaginator(data) {
 // 1.2 任何動作渲染畫面前切換
 viewMode.addEventListener('click', function onClickedViewMode(event) {
   // const data = filteredResult.length ? filteredResult : users
-  displayUsers(getUsersByPage(1))
+  displayUsers(getUsersByPage(thePage))
   displayPaginator(users)
-  console.log(users)
 })
 
 // 函式 - 將所有使用者的資料渲染畫面

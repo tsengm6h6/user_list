@@ -7,6 +7,7 @@ const USERS_PER_PAGE = 12
 const users = [];
 let searchResult = [];
 let filteredResult = [];
+let thePage = 1;
 
 const dataPanel = document.querySelector("#data-panel")
 const searchForm = document.querySelector('#search-form')
@@ -46,6 +47,7 @@ genderSelector.addEventListener('click', function onGenderClicked(event) {
 
 // 加入搜尋功能
 // 1.1 按鈕上設置監聽器，Submit時執行onSearchClicked(){
+
 // 1.2 如果搜尋欄沒東西，則return
 // 1.3 如果搜尋欄有東西，則進行searchUserBy(name) 
 // 1.4 如果搜尋結果為 0，則顯示'查無此人'，用users渲染畫面 }
@@ -139,7 +141,7 @@ function searchByWhat(word) {
 // 1.3 設置監聽器，當點擊分頁碼時，找出資料切割的區段
 // 1.4 將回傳的該區段資料渲染在畫面上
 paginator.addEventListener('click', function onPaginatorClicked(event) {
-  const thePage = event.target.dataset.page
+  thePage = event.target.dataset.page
   displayUsers(getUsersByPage(thePage))
 })
 
@@ -177,9 +179,10 @@ function displayPaginator(data) {
 // 1.2 任何動作渲染畫面前切換
 viewMode.addEventListener('click', function onClickedViewMode(event) {
   const data = filteredResult.length ? filteredResult : users
-  displayUsers(getUsersByPage(1))
+  displayUsers(getUsersByPage(thePage))
   displayPaginator(data)
-  console.log(data)
+  // console.log(data)
+  // console.log(thePage)
 })
 
 // 函式 - 將所有使用者的資料渲染畫面

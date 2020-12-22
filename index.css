@@ -302,6 +302,65 @@ header nav .middle-line::after {
   left: 0;
 }
 
+header.favorite {
+  height: 50vh;
+}
+
+header.favorite .logo-container {
+  width: 30%;
+  height: auto;
+  position: relative;
+  right: 32%;
+  bottom: 12%;
+}
+
+header.favorite #logo {
+  font-size: 2rem;
+  letter-spacing: 1px;
+  text-shadow: 2px 1px #FFF8F0, 4px 1px #3b3833ff;
+}
+
+header.favorite #logo #heart-beat {
+  font-size: 0.5rem;
+  text-shadow: 2px 1px #FFF8F0, 3px 2px #3b3833ff;
+  top: 4px;
+  left: 68px;
+}
+
+header.favorite p {
+  font-size: 12px;
+  bottom: 23px;
+  left: 2px;
+  letter-spacing: 0px;
+}
+
+header.favorite p::before, header.favorite p::after {
+  width: 45%;
+  top: 0;
+}
+
+header.favorite p::before {
+  left: -66px;
+}
+
+header.favorite p:after {
+  right: -66px;
+}
+
+header.favorite nav .middle-line::before {
+  content: 'Collect your Favorite person here\A Click to find more info or Remove to Blacklist';
+  white-space: pre-line;
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 288px;
+  letter-spacing: 2px;
+  font-family: lobster two;
+  color: #c1b2abff;
+  text-align: center;
+  font-size: 0.5rem;
+}
+
 .slice {
   display: none;
   -webkit-box-orient: vertical;

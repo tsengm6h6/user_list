@@ -63,6 +63,7 @@ header {
   // border: 1px solid red;
   
   .logo-container {
+    // border: 1px solid green;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -72,65 +73,65 @@ header {
     font-family: lobster two;
     // position: relative;
 
-    #logo {
-    text-align: center;
-    font-size: 8rem;
-    font-weight: 900;
-    color: $main-rose;
-    letter-spacing: 5px;
-    text-shadow: 
-    3px 2px $background-white,
-    8px 2.5px $border-black;
-    position: relative;
-    transform: skew(-10deg) rotateZ(-7deg);
-
-      #heart-beat {
-      position: absolute;
-      top: 23px;
-      left: 278px;
-      z-index: 5;
-      font-size: 2.75rem;
+      #logo {
+      text-align: center;
+      font-size: 8rem;
+      font-weight: 900;
       color: $main-rose;
-      display: block;
-      animation: heartbeat 1s infinite;
+      letter-spacing: 5px;
       text-shadow: 
       3px 2px $background-white,
-      6px 3px $border-black;
+      8px 2.5px $border-black;
+      position: relative;
+      transform: skew(-10deg) rotateZ(-7deg);
+
+        #heart-beat {
+        position: absolute;
+        top: 23px;
+        left: 278px;
+        z-index: 5;
+        font-size: 2.75rem;
+        color: $main-rose;
+        display: block;
+        animation: heartbeat 1s infinite;
+        text-shadow: 
+        3px 2px $background-white,
+        6px 3px $border-black;
+      }
+        
     }
+
+    p {
+      // border: 1px solid green;
+      color: $border-black ;
+      font-family: lobster two;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      transform: skew(-10deg) rotateZ(-7deg);
+      margin: 0;
+      position: relative;
+      bottom: 30px;
+      left: 10px;
       
-  }
+      &::before, &::after {
+        content: '';
+        display: inline-block;
+        width: 30%;
+        height: 1px;
+        background-color: $main-blue;
+        position: absolute;
+        top:50%;
+        box-shadow: 2px 3px $main-rose;
+      }
 
-  p {
-    // border: 1px solid green;
-    color: $border-black ;
-    font-family: lobster two;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    transform: skew(-10deg) rotateZ(-7deg);
-    margin: 0;
-    position: relative;
-    bottom: 30px;
-    left: 10px;
-    
-    &::before, &::after {
-      content: '';
-      display: inline-block;
-      width: 30%;
-      height: 1px;
-      background-color: $main-blue;
-      position: absolute;
-      top:50%;
-      box-shadow: 2px 3px $main-rose;
-    }
+      &::before {
+        left: -60px;
+      }
 
-    &::before {
-      left: -60px;
+      &::after {
+        right: -60px;
+      }
     }
-
-    &::after {
-      right: -60px;
-    }
-  }
 
   }
 
@@ -232,6 +233,78 @@ header {
     }
     
     }
+
+  &.favorite {
+      // border: 1px solid blue;
+      height: 50vh;
+      .logo-container {
+        width: 30%;
+        height: auto;
+        position: relative;
+        right:32%;
+        bottom: 12%;
+      }
+
+      #logo {
+        font-size: 2rem;
+        letter-spacing: 1px;
+        text-shadow: 
+        2px 1px $background-white,
+        4px 1px $border-black;
+
+        #heart-beat {
+          font-size: 0.5rem;
+          text-shadow: 
+          2px 1px $background-white,
+          3px 2px $border-black;
+          top: 4px;
+          left: 68px;
+        }
+      }
+
+      p {
+        font-size: 12px;
+        bottom: 23px;
+        left: 2px;
+        letter-spacing: 0px;
+
+        &::before,&::after{
+          width: 45%;
+          top: 0;
+        }
+        
+        &::before{
+          left: -66px;
+        }
+
+        &:after {
+          right: -66px;
+        }
+      }
+
+      nav {
+        .middle-line {
+
+          // TODO: 應改為div
+          &::before {
+            content: 'Collect your Favorite person here\A
+            Click to find more info or Remove to Blacklist';
+            white-space: pre-line;
+            display: block;
+            position: absolute;
+            top: 30px;
+            left: 288px;
+            letter-spacing: 2px;
+            font-family: lobster two;
+            color: $item-silver;
+            text-align: center;
+            font-size: 0.5rem;
+          }
+        }
+      }
+
+    }
+
 }
 
 
