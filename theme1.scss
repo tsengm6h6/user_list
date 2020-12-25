@@ -32,10 +32,6 @@ ul, li {
   list-style: none;
 }
 
-html{
-  font-size: 16px;
-}
-
 body {
   background-color: $background-white;
   background-image: url('./noisy.png');
@@ -105,7 +101,7 @@ header {
           font-size: 0.8rem;
 
           i{
-            font-size: 1rem;
+            font-size: 1.5rem;
            &:hover {
             color: $main-rose;
             opacity: 0.8;
@@ -126,8 +122,8 @@ header {
           justify-content: center;
           background-color: $item-silver;
           position: absolute;
-          top: 28px;
-          right: 15px;
+          top: 108%;
+          right: 55%;
           padding: 2px;
           border-radius: 2px;
 
@@ -347,7 +343,7 @@ header {
 
         .login-container{
           position: absolute;
-          top: 6px;
+          top: 3%;
           right: -212%;
         }
         
@@ -672,7 +668,7 @@ main {
           i {
             display: block;
             position: relative;
-            font-size: 1em;
+            font-size: 1.2em;
             color: $main-rose;
             bottom: 0;
             transition: all .1s ease-in;
@@ -1001,13 +997,13 @@ main {
     .logo-container{
       
       .login-container{
-          top: 20px;
+          top: 5%;
           right: 4%;
 
           button{
             font-size: 0.5rem;
             i{
-              font-size: 0.8rem;
+              font-size: 1.5rem;
             }
           }
         }
@@ -1047,7 +1043,7 @@ main {
         bottom: 0;
 
         .login-container{
-          top: -20px;
+          top: -45%;
           right: -100%;
         }
 

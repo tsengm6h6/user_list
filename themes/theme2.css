@@ -11,10 +11,6 @@ ul, li {
   list-style: none;
 }
 
-html {
-  font-size: 16px;
-}
-
 body {
   background-color: #f1ebd5;
   background-image: url("./noisy.png");
@@ -149,7 +145,7 @@ header .logo-container .login-container button {
 }
 
 header .logo-container .login-container button i {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 header .logo-container .login-container button i:hover {
@@ -174,8 +170,8 @@ header .logo-container .login-container .themes {
           justify-content: center;
   background-color: #626945;
   position: absolute;
-  top: 28px;
-  right: 15px;
+  top: 108%;
+  right: 55%;
   padding: 2px;
   border-radius: 2px;
 }
@@ -421,7 +417,7 @@ header.favorite .logo-container {
 
 header.favorite .logo-container .login-container {
   position: absolute;
-  top: 6px;
+  top: 3%;
   right: -212%;
 }
 
@@ -782,7 +778,7 @@ main .user-info .user-card .img-container button {
 main .user-info .user-card .img-container button i {
   display: block;
   position: relative;
-  font-size: 1em;
+  font-size: 1.2em;
   color: #e2b752;
   bottom: 0;
   -webkit-transition: all .1s ease-in;
@@ -1118,14 +1114,14 @@ main .user-info .user-card-list .btn-container button i.btn-remove-love {
     font-size: 18px;
   }
   header .logo-container .login-container {
-    top: 20px;
+    top: 5%;
     right: 4%;
   }
   header .logo-container .login-container button {
     font-size: 0.5rem;
   }
   header .logo-container .login-container button i {
-    font-size: 0.8rem;
+    font-size: 1.5rem;
   }
   header .logo-container #logo {
     font-size: 4rem;
@@ -1153,7 +1149,7 @@ main .user-info .user-card-list .btn-container button i.btn-remove-love {
     bottom: 0;
   }
   header.favorite .logo-container .login-container {
-    top: -20px;
+    top: -45%;
     right: -100%;
   }
   header.favorite .logo-container #logo #heart-beat {
