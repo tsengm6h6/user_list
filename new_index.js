@@ -18,6 +18,10 @@ const searchButton = document.querySelector('#search-button')
 const filter = document.querySelector('#filter')
 const viewMode = document.querySelector('#view-mode')
 
+
+// Login區塊
+// 1.1 主題選擇
+
 // 搜尋欄與篩選器顯示
 searchButton.addEventListener('click', function onSearchButtonClicked(event) {
   const slice = document.querySelector('.slice')

@@ -62,8 +62,9 @@ header {
   align-items: center;
   // border: 1px solid red;
   
+
   .logo-container {
-    // border: 1px solid green;
+    border: 1px solid green;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,7 +72,90 @@ header {
     width: 100%;
     height: 100vh;
     font-family: lobster two;
-    // position: relative;
+    position: relative;
+
+      .login-container {
+        border: 1px solid orange;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+
+        // TODO: 待調整
+        button {
+          background-color: transparent;
+          color: $item-silver;
+          border: none;
+          box-shadow: none;
+          padding: 0 2px;
+          font-size: 0.8rem;
+
+          i{
+           &:hover {
+            color: $main-rose;
+            opacity: 0.8;
+          } 
+          }
+
+          &:focus {
+            outline:none ;
+          }
+
+        }
+
+        .themes{
+          // border: 1px solid blue;
+          display: flex;
+          flex-direction: column;
+          align-content: center;
+          justify-content: center;
+          background-color: $item-silver;
+          position: absolute;
+          top: 28px;
+          right: 15px;
+          padding: 2px;
+          border-radius: 2px;
+
+          .fa-caret-up{
+            position: absolute;
+            top: -9px;
+            right: 8px;
+            color: $item-silver;
+          }
+
+          .theme{
+            width: 70px;
+            padding: 1px 0;
+            line-height: 16px;
+            border-radius: 2px;
+            color: $background-white;
+            text-shadow: -1px 1px 2px rgb(161, 147, 140);
+            font-family: 'Oswald';
+
+            &:hover{
+              opacity: 1;
+
+              &.pink{
+                color: #e75140;
+              }
+              
+              &.warm{
+                color: #f8cd58; 
+              }
+            }
+          }
+
+          &.show{
+            display: flex;
+          }
+
+        }
+
+      }
+        
+         
+
+      
+      
 
       #logo {
       text-align: center;
@@ -311,7 +395,7 @@ header {
 // ******* Slice 搜尋欄 ***********//
 
 // 搜尋按鈕統一設定
-@mixin button {
+@mixin radio-button {
 
         input[type=radio] {
           display: none;
@@ -423,7 +507,7 @@ header {
       align-items: center;
       margin-top: 2px;
 
-      @include button;
+      @include radio-button;
 
       em {
         font-weight: 500;
@@ -491,7 +575,7 @@ main {
   .view-mode {
     // border: 1px solid red;
     margin-bottom: 2px;
-    @include button;
+    @include radio-button;
     
     label {
       background-color: transparent;
