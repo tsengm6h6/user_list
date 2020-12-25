@@ -11,6 +11,10 @@ ul, li {
   list-style: none;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   background-color: #FFF8F0;
   background-image: url("./noisy.png");
