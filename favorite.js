@@ -96,7 +96,7 @@ function displayUsers(data) {
     // 依序讀取users資料，用gallery模式顯示
     data.forEach((item) => {
       htmlContent += `
-    <div class="col-3 my-3">
+    <div class="col-sm-6 col-md-4 col-lg-3 my-3"">
         <div class="user-card">
           <div class="img-container ${item.gender}">
             <img src="${item.avatar}" class="card-img modal-trigger" data-id='${item.id}'

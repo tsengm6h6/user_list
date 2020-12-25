@@ -77,8 +77,8 @@ header {
       .login-container {
         // border: 1px solid orange;
         position: absolute;
-        top: 10px;
-        right: 15px;
+        top: 20px;
+        right: 4%;
         display: flex;
         align-items: center;
 
@@ -183,7 +183,7 @@ header {
 
         #heart-beat {
         position: absolute;
-        top: 23px;
+        top: 22px;
         left: 278px;
         z-index: 5;
         font-size: 2.75rem;
@@ -668,7 +668,7 @@ main {
           i {
             display: block;
             position: relative;
-            font-size: .8em;
+            font-size: 1em;
             color: $main-rose;
             bottom: 0;
             transition: all .1s ease-in;
@@ -982,3 +982,147 @@ main {
 
     }
   }
+
+  // RWD 設定
+
+// 768px 以下
+@media (max-width: 768px) {
+  
+  html {
+      font-size: 18px;
+    }
+
+  header{
+
+    .logo-container{
+      
+      .login-container{
+          top: 20px;
+          right: 4%;
+
+          button{
+            font-size: 0.5rem;
+            i{
+              font-size: 0.8rem;
+            }
+          }
+        }
+      
+      #logo{
+        font-size: 4rem;
+
+        #heart-beat{
+          top: 12px;
+          left: 167px;
+          font-size: 1.5rem;
+        }
+      }
+
+      p {
+        font-size: 1rem;
+        bottom: 22px;
+
+        &::before{
+          width: 13%;
+          left: -30px;
+        }
+
+        &::after{
+          width: 13%;
+          right: -23px;
+        }
+      }
+
+    } 
+
+     &.favorite{
+
+      .logo-container{
+        right: 0;
+        margin-top: 20%;
+        bottom: 0;
+
+        .login-container{
+          top: -20px;
+          right: -100%;
+        }
+
+        #logo{
+
+          #heart-beat{
+            top: 13.5px;
+            left: 148px;
+            font-size: 1.3rem;
+          }
+
+        }
+        
+        p {
+          &::before{
+            left: -35px;
+            top: 12px;
+            width: 30%;
+          }
+          &::after{
+            right: -32px;
+            top: 13px;
+            width: 30%;
+          }
+        }
+      }
+
+      nav{
+        .nav-container{
+          font-size: 0.8rem;
+        }
+        .brief-info{
+          margin-top: 30px;
+          font-size: 0.5rem;
+        }
+      }
+
+    }
+  }
+
+  main {
+    
+    .view-mode{
+          label {
+            font-size: 1rem;
+          }
+        } 
+
+    .user-info{
+
+      .user-card{
+        .img-container{
+          button{
+            i{
+              font-size: 1.2em;
+            }
+          } 
+        } 
+      } 
+      .user-card-list{
+        width: 100%;
+        min-width: 350px;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .nav-paginator{
+
+    ul {
+      justify-content: center;
+      width: 100%;
+      font-size: 0.5rem;
+
+      .page-link{
+        font-size: 0.8rem;
+        padding: 0.3rem;
+      }
+    }
+  }
+  
+}
