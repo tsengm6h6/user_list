@@ -64,7 +64,7 @@ header {
   
 
   .logo-container {
-    border: 1px solid green;
+    // border: 1px solid green;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,12 +75,23 @@ header {
     position: relative;
 
       .login-container {
-        border: 1px solid orange;
+        // border: 1px solid orange;
         position: absolute;
         top: 10px;
         right: 15px;
+        display: flex;
+        align-items: center;
 
-        // TODO: 待調整
+        .themeChoice{
+          margin-right: 6px;
+
+          &:hover{
+            .themes{
+              display: flex;
+            }
+          }
+        }
+
         button {
           background-color: transparent;
           color: $item-silver;
@@ -90,10 +101,11 @@ header {
           font-size: 0.8rem;
 
           i{
+            font-size: 1rem;
            &:hover {
             color: $main-rose;
             opacity: 0.8;
-          } 
+            } 
           }
 
           &:focus {
@@ -104,7 +116,7 @@ header {
 
         .themes{
           // border: 1px solid blue;
-          display: flex;
+          display: none;
           flex-direction: column;
           align-content: center;
           justify-content: center;
@@ -319,14 +331,22 @@ header {
     }
 
   &.favorite {
-      // border: 1px solid blue;
       height: 50vh;
+
       .logo-container {
         width: 30%;
         height: auto;
         position: relative;
         right:32%;
         bottom: 12%;
+        margin-top: 5%;
+
+        .login-container{
+          position: absolute;
+          top: 6px;
+          right: -212%;
+        }
+        
       }
 
       #logo {
@@ -367,24 +387,17 @@ header {
       }
 
       nav {
-        .middle-line {
 
-          // TODO: 應改為div
-          &::before {
-            content: 'Collect your Favorite person here\A
-            Click to find more info or Remove to Blacklist';
-            white-space: pre-line;
-            display: block;
-            position: absolute;
-            top: 30px;
-            left: 288px;
-            letter-spacing: 2px;
-            font-family: lobster two;
-            color: $item-silver;
-            text-align: center;
-            font-size: 0.5rem;
-          }
+          .brief-info {
+          text-align: center;
+          color: $item-silver;
+          white-space: pre-line;
+          font-family: lobster two;
+          font-size: 1em;
+          letter-spacing: 1px;
+          margin: 16px 0 0;
         }
+
       }
 
     }

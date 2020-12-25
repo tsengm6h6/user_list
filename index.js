@@ -1,18 +1,64 @@
 // 初始變數
 const BASE_URL = "https://lighthouse-user-api.herokuapp.com";
 const INDEX_URL = BASE_URL + "/api/v1/users/";
-const USERS_PER_PAGE = 18
+const USERS_PER_PAGE = 12
 
 // 存放資料的容器
 const users = [];
 let searchResult = [];
 let filteredResult = [];
+let thePage = 1;
 
 const dataPanel = document.querySelector("#data-panel")
 const searchForm = document.querySelector('#search-form')
 const searchInput = document.querySelector('#search-input')
 const paginator = document.querySelector('#paginator')
 const genderSelector = document.querySelector('#genderSelector')
+const searchButton = document.querySelector('#search-button')
+const filter = document.querySelector('#filter')
+const viewMode = document.querySelector('#view-mode')
+const themeChoice = document.querySelector('#themeChoice')
+
+// Login區塊
+// 1.1 主題選擇 --> 預設為pink主題
+themeChoice.addEventListener('click', function onClickedTheme(e) {
+  const head = document.querySelector('head')
+
+  // 點擊warm主題，則新增css樣式表
+  if (e.target.matches('.warm')) {
+    const newTheme = document.createElement('link')
+    newTheme.rel = 'stylesheet'
+    newTheme.href = './themes/theme2.css'
+    head.append(newTheme)
+  }
+
+  // 點擊pink，若樣式為pink，則返回；否則移除最後一個元素，即warm樣式表
+  else if (e.target.matches('.pink')) {
+
+    if (head.lastElementChild.href = './themes/theme1.css') return
+    else {
+      head.removeChild(head.lastElementChild)
+    }
+  }
+
+})
+
+
+
+// 搜尋欄與篩選器顯示
+searchButton.addEventListener('click', function onSearchButtonClicked(event) {
+  const slice = document.querySelector('.slice')
+  const caretIcon = document.querySelector('.fa-caret-up')
+  slice.classList.toggle('show')
+  caretIcon.classList.toggle('show')
+})
+
+filter.addEventListener('click', function onFilterClicked(event) {
+  const searchContainer = document.querySelector('.search-container')
+  const searchFilter = document.querySelector('.search-filter')
+  searchContainer.classList.toggle('show')
+  searchFilter.classList.toggle('show')
+})
 
 
 // TODO: 先做gender監聽
@@ -28,6 +74,7 @@ genderSelector.addEventListener('click', function onGenderClicked(event) {
 
 // 加入搜尋功能
 // 1.1 按鈕上設置監聽器，Submit時執行onSearchClicked(){
+
 // 1.2 如果搜尋欄沒東西，則return
 // 1.3 如果搜尋欄有東西，則進行searchUserBy(name) 
 // 1.4 如果搜尋結果為 0，則顯示'查無此人'，用users渲染畫面 }
@@ -121,7 +168,7 @@ function searchByWhat(word) {
 // 1.3 設置監聽器，當點擊分頁碼時，找出資料切割的區段
 // 1.4 將回傳的該區段資料渲染在畫面上
 paginator.addEventListener('click', function onPaginatorClicked(event) {
-  const thePage = event.target.dataset.page
+  thePage = event.target.dataset.page
   displayUsers(getUsersByPage(thePage))
 })
 
@@ -154,30 +201,68 @@ function displayPaginator(data) {
 
 }
 
+// 切換渲染顯示
+// 1.1 綁定監聽器，點選時切換
+// 1.2 任何動作渲染畫面前切換
+viewMode.addEventListener('click', function onClickedViewMode(event) {
+  const data = filteredResult.length ? filteredResult : users
+  displayUsers(getUsersByPage(thePage))
+  displayPaginator(data)
+  // console.log(data)
+  // console.log(thePage)
+})
+
 // 函式 - 將所有使用者的資料渲染畫面
 function displayUsers(data) {
-  let htmlContent = ``;
-  // 依序讀取users資料
-  data.forEach((item) => {
-    htmlContent += `
-    <div class="col-sm-2 mb-3">
-      <div class="card">
-        <img src="${item.avatar}" class="card-img-top" data-id='${item.id}' data-toggle="modal" data-target="#user-modal" alt="...">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-8">
-              <h5 class="card-title">${item.name}</h5>
-            </div>
-            <div class="col-4">
-              <button type="button" class="btn btn-info btn-sm btn-add-love" data-id='${item.id}'><i class="fas fa-heart btn-add-love" data-id='${item.id}'></i></button>
-            </div>
-           </div>
+  let htmlContent = ``
+
+  // 取得顯示模式
+  const selectedMode = document.querySelector('input[name=view]:checked').value
+
+  if (selectedMode === 'gallery') {
+    // 依序讀取users資料，用gallery模式顯示
+    data.forEach((item) => {
+      htmlContent += `
+    <div class="col-3 my-3">
+        <div class="user-card">
+          <div class="img-container ${item.gender}">
+            <img src="${item.avatar}" class="card-img modal-trigger" data-id='${item.id}'
+              data-toggle="modal" data-target="#user-modal" alt="user-img">
+            <button type="button" class="btn-add-love" data-id='${item.id}'>
+              <i class="fas fa-heart btn-add-love" data-id='${item.id}'></i>
+            </button>
+          </div>
+          <div class="card-title">${item.name}</div>
         </div>
       </div>
-    </div>
     `;
-    // console.log(item);
-  });
+      // console.log(item);
+    })
+  }
+
+  else if (selectedMode === 'list') {
+    // 依序讀取users資料，用List模式顯示
+    data.forEach((item) => {
+      htmlContent += `
+      <div class="col-12 my-1">
+        <div class="user-card-list">
+          <div class="info-container">
+            <span class='${item.gender}'></span>
+            <div class="card-title">${item.name} ${item.surname}</div>
+          </div>
+          <div class="btn-container">
+            <button class="modal-trigger" data-id='${item.id}' data-toggle="modal"
+              data-target="#user-modal">More</button>
+            <button type="button" class="btn-add-love" data-id='${item.id}'>
+              <i class="fas fa-heart btn-add-love" data-id='${item.id}'></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+      // console.log(item);
+    })
+  }
 
   dataPanel.innerHTML = htmlContent;
 }
@@ -225,7 +310,7 @@ function addToLove(id) {
 
 // dataPanel監聽器，點擊圖像時取得使用者id的API資料
 dataPanel.addEventListener("click", function onPanelClicked(event) {
-  if (event.target.matches(".card-img-top")) {
+  if (event.target.matches(".modal-trigger")) {
     //如果點擊的是圖像
     showUserModal(Number(event.target.dataset.id)); //取得圖像id並且執行showUserModal
   } else if (event.target.matches('.btn-add-love')) { //點擊愛心

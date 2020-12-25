@@ -6,112 +6,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 
-  <link rel="stylesheet" href="./index.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="./themes/theme1.css">
 </head>
 
 <body>
-
-  <!-- NavBar 導覽列 -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="./index.html">Fake User List <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./favorite.html">Fake Love</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-12">Filter</div>
-    </div>
-
-    <!-- 男 / 女 -->
-    <div class="row mt-2 d-flex justify-content-between align-items-center" id='genderSelector'>
-      <div class="col-6">
-        <em class='mr-2'>Show only : </em>
-        <div class="form-check form-check-inline">
-          <input checked class="form-check-input" type="radio" name="genderChoice" id="searchAllGender" value="all">
-          <label class="form-check-label" for="searchAllGender">All</label>
+  <!-- Header -->
+  <header>
+    <!-- 標題復古疊字效果 -->
+    <div class='logo-container'>
+      <!-- TODO: Login logo -->
+      <div class="login-container">
+        <div class="themeChoice" id='themeChoice'>
+          <button><i class="fas fa-palette"></i></button>
+          <div class="themes">
+            <i class="fas fa-caret-up"></i>
+            <button class="theme pink">lovely pink</button>
+            <button class="theme warm">warm spring</button>
+          </div>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="genderChoice" id="searchMaleOnly" value="male">
-          <label class="form-check-label" for="searchMaleOnly">Male</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="genderChoice" id="searchFemaleOnly" value="female">
-          <label class="form-check-label" for="searchFemaleOnly">Female</label>
-        </div>
+        <button><i class="fas fa-user-circle"></i></button>
       </div>
+      <h1 id="logo">LoveliPop
+        <i id='heart-beat' class="fas fa-heart" aria-hidden="true"></i>
+      </h1>
+      <p class='lower'>when love pops up</p>
+      <!-- 加箭頭指示向下 -->
     </div>
-
-    <!-- TODO: 年齡範圍 -->
-    <div class="row mt-2 d-flex justify-content-between align-items-center">
-      <div class="col-6">
-        <em class='mr-2'>Age Range: </em>
-        <!-- TODO: Range Bar Here -->
-        <label for="customRange2"></label>
-        <input type="range" class="custom-range" min="18" max="85" id="ageRange">
+    <nav id='header-nav'>
+      <div class="nav-container">
+        <a href="./favorite.html">Favorite</a>
+        <i class="fas fa-heart" aria-hidden="true"></i>
+        <a href="./index.html">HOME</a>
+        <i class="fas fa-heart" aria-hidden="true"></i>
+        <a href="#">Blacklist</a>
       </div>
-    </div>
-
-    <!-- TODO: SearchBy 分類 -->
-    <div class="row mt-2 d-flex justify-content-between align-items-center">
-      <div class="col-6">
-        <em class='mr-2'>Search By : </em>
-        <div class="form-check form-check-inline">
-          <input checked class="form-check-input" type="radio" name="nameOrRegion" id="searchByName" value="name">
-          <label class="form-check-label" for="searchByName">Name</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="nameOrRegion" id="searchByRegion" value="region">
-          <label class="form-check-label" for="searchByRegion">Region</label>
-        </div>
+      <div class='nav-search'>
+        <!-- 點選button時icon箭頭向上 -->
+        <button id='search-button' href="#">Search<i class="fas fa-caret-up"></i>
+          <i class="fas fa-caret-down "></i>
+        </button>
       </div>
-    </div>
+      <div class="middle-line"></div>
+    </nav>
+  </header>
 
-    <!--  搜尋欄  -->
-    <div class="row mt-2 d-flex justify-content-between align-items-center">
-      <form class="form-inline" id='search-form'>
-        <input class="form-control mr-sm-2" id='search-input' type="text" placeholder="find your love..."
-          aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0 btn-search-love" type="submit">Search</button>
-      </form>
-    </div>
+  <!-- Slice / Search -->
+  <div class="slice">
+    <div class="search-container">
+      <section class="search-bar">
+        <form action="submit" id='search-form'>
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input id='search-input' type="text">
+          <i class="fa fa-filter" aria-hidden="true" id='filter'></i>
+          <!-- 點擊filter時，container跟search-filter加上show的class -->
+        </form>
+        <div class="search-filter">
+          <div class="methods-container">
+            <em>Method</em>
+            <input checked class="search-method" type="radio" name="nameOrRegion" id="searchByName" value="name">
+            <label class="search-method-label" for="searchByName">Name</label>
 
-    <!-- TODO: reset鍵 -->
-    <!-- TODO: 顯示 Gallery / List 欄位 -->
-    <div class="row d-flex justify-content-between align-items-center">
-      <div class="col">
-        <div class="icons d-flex justify-content-end" id='view-style'>
-          <i class="fas fa-border-all mr-2 mt-3"></i>
-          <i class="fas fa-bars mr-2 mt-3"></i>
+            <input class="search-method" type="radio" name="nameOrRegion" id="searchByRegion" value="region">
+            <label class="search-method-label" for="searchByRegion">Region</label>
+
+          </div>
+          <div class="gender-options-container" id='genderSelector'>
+            <em>Gender </em>
+            <div class="gender-options">
+              <input checked class="search-gender" type="radio" name="genderChoice" id="searchAllGender" value="all">
+              <label class="search-gender-label" for="searchAllGender">All</label>
+            </div>
+            <div class="gender-options">
+              <input class="search-gender" type="radio" name="genderChoice" id="searchMaleOnly" value="male">
+              <label class="search-gender-label" for="searchMaleOnly">Male</label>
+            </div>
+            <div class="gender-options">
+              <input class="search-gender" type="radio" name="genderChoice" id="searchFemaleOnly" value="female">
+              <label class="search-gender-label" for="searchFemaleOnly">Female</label>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
-
-    <!--  user清單  -->
-    <div class="row mt-3" id='data-panel'>
-      <!--  Display User List Here    -->
-    </div>
+    <div class="middle-line"></div>
   </div>
 
-  <!-- Paginator 分頁 -->
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center" id='paginator'>
+  <!-- Main -->
+  <main class='main-container'>
+
+    <!-- 切換顯示 -->
+    <div class="row view-mode" id='view-mode'>
+      <input checked type="radio" name="view" id="galleryView" value="gallery">
+      <label class="view-mode-label" for="galleryView">
+        <i class='fas fa-border-all'></i>
+      </label>
+
+      <input type="radio" name="view" id="listView" value="list">
+      <label class="view-mode-label" for="listView">
+        <i class='fas fa-bars'></i>
+      </label>
+    </div>
+
+    <!-- 使用者資訊 -->
+    <div class="row user-info justify-content-center" id='data-panel'>
+      <!-- Display User List Here -->
+      <!-- Gallery  / List view -->
+    </div>
+  </main>
+
+  <!-- Paginator分頁 -->
+  <nav aria-label="Page navigation example" class='nav-paginator'>
+    <ul class="pagination" id='paginator'>
       <!-- displayPaginator -->
+
     </ul>
   </nav>
 
@@ -120,30 +130,29 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header text-center">
+
+        <div class="modal-body">
           <h5 class="modal-title text-uppercase" id="user-modal-title">User Name</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <ul id='user-modal-info'>
+            <li>Birthday：</li>
+            <li>Gender：</li>
+            <li>Region：</li>
+            <li>Email：</li>
+          </ul>
         </div>
-        <div class="modal-body modal-lg">
-          <div class="row no-gutters">
-            <div class="col-3" id='user-modal-image'>
-              <img src="https://randomuser.me/api/portraits/men/88.jpg" alt="user-avatar" class='img-fluid'>
-            </div>
-            <div class="col-9">
-              <ul class='justify-content-start' id='user-modal-info'>
-                <li>Birthday：</li>
-                <li>Gender：</li>
-                <li>Region：</li>
-                <li>Email：</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn" data-dismiss="modal">Close</button>
         </div>
+
+        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+        <div id='user-modal-image'>
+          <img src="https://randomuser.me/api/portraits/men/88.jpg" alt="user-avatar">
+        </div>
+
       </div>
     </div>
   </div>

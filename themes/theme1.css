@@ -93,7 +93,6 @@ header {
 }
 
 header .logo-container {
-  border: 1px solid green;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -114,10 +113,25 @@ header .logo-container {
 }
 
 header .logo-container .login-container {
-  border: 1px solid orange;
   position: absolute;
   top: 10px;
   right: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header .logo-container .login-container .themeChoice {
+  margin-right: 6px;
+}
+
+header .logo-container .login-container .themeChoice:hover .themes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 header .logo-container .login-container button {
@@ -130,6 +144,10 @@ header .logo-container .login-container button {
   font-size: 0.8rem;
 }
 
+header .logo-container .login-container button i {
+  font-size: 1rem;
+}
+
 header .logo-container .login-container button i:hover {
   color: #e05d4fff;
   opacity: 0.8;
@@ -140,9 +158,7 @@ header .logo-container .login-container button:focus {
 }
 
 header .logo-container .login-container .themes {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -396,6 +412,13 @@ header.favorite .logo-container {
   position: relative;
   right: 32%;
   bottom: 12%;
+  margin-top: 5%;
+}
+
+header.favorite .logo-container .login-container {
+  position: absolute;
+  top: 6px;
+  right: -212%;
 }
 
 header.favorite #logo {
@@ -431,18 +454,14 @@ header.favorite p:after {
   right: -66px;
 }
 
-header.favorite nav .middle-line::before {
-  content: 'Collect your Favorite person here\A Click to find more info or Remove to Blacklist';
-  white-space: pre-line;
-  display: block;
-  position: absolute;
-  top: 30px;
-  left: 288px;
-  letter-spacing: 2px;
-  font-family: lobster two;
-  color: #c1b2abff;
+header.favorite nav .brief-info {
   text-align: center;
-  font-size: 0.5rem;
+  color: #c1b2abff;
+  white-space: pre-line;
+  font-family: lobster two;
+  font-size: 1em;
+  letter-spacing: 1px;
+  margin: 16px 0 0;
 }
 
 .slice {
@@ -1089,4 +1108,4 @@ main .user-info .user-card-list .btn-container button i.btn-remove-love {
   border-radius: 50%;
   border: 4px solid #FFF8F0;
 }
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=theme1.css.map */
